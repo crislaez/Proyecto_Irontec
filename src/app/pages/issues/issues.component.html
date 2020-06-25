@@ -4,8 +4,18 @@
         <h2>Issues</h2>
         <input [routerLink]="['/']" type='button' value="ir a inicio">
     </div>
+
+    <div class="divNombeRepositorio">
+        <h3>ISSUES DEL PROJECTO {{repoGit}}</h3>
+    </div>
     
     <div class="divContenedorIssues" *ngIf="aparecerContenedor">
-
+        <div class="divIssues" *ngFor="let index of arrayIssues">
+            <a [href]="index.html_url">{{index.title}}</a>
+            <label class="labelName" *ngFor="let indexDos of index.labels">{{indexDos.name}}</label>
+        </div>
     </div>
+
 </section>
+
+<!-- <label class="labelName" *ngIf="index.labels[0].name">{{index.labels[0].name}}</label> -->

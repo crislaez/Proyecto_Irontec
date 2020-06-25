@@ -26,12 +26,26 @@ export class IssuesComponent implements OnInit {
     console.log(this.usuarioGit);
     console.log(this.repoGit);
 
-    // getGitData(enviroment.rutarepos+'Microsoft/TypeScript/issues?labels=API')
-    getGitData(enviroment.rutarepos+this.usuarioGit+'/'+this.repoGit+'/issues?labels=API')
+    this.funcionFetch();
+  };
+
+  //funcion fetch
+  funcionFetch(){
+   
+    getGitData(enviroment.rutarepos+this.usuarioGit+'/'+this.repoGit+'/issues')
     .then((response:any) => {
       console.log(response)
+
+      if(response.toString()){
+        this.aparecerContenedor = true;
+        this.arrayIssues = response
+      }else{
+        alert('No hay issues')
+        window.location.href = '/';
+      }
+      
     })
     .catch(err => console.log(err))
-  };
+  }
 
 }
