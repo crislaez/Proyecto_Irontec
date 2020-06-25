@@ -2,11 +2,11 @@
 
 Prueba para Irontec (en construccion)
 
-<img src="https://github.com/crislaez/Prueba_Irontec/blob/master/src/assets/foto_proyecto.PNG" />
+<img src="https://github.com/crislaez/Proyecto_Irontec/blob/master/src/assets/foto_proyecto.PNG" />
 <hr>
-<img src="https://github.com/crislaez/Prueba_Irontec/blob/master/src/assets/foto_proyecto_2.PNG" />
+<img src="https://github.com/crislaez/Proyecto_Irontec/blob/master/src/assets/foto_proyecto_2.PNG" />
 <hr>
-<img src="https://github.com/crislaez/Prueba_Irontec/blob/master/src/assetsc/foto_proyecto_3.PNG" />
+<img src="https://github.com/crislaez/Proyecto_Irontec/blob/master/src/assetsc/foto_proyecto_3.PNG" />
 
 ### Que hace el proyecto
 
