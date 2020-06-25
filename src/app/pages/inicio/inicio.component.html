@@ -1,0 +1,32 @@
+<section class="sectionInicio">
+
+    <form class="formBuscador" (submit)="handleSubmit()" action="" method="" enctype="">
+        <input [(ngModel)]="nombre" type="text" name="nombre" placeholder="Usuario github..."/>
+        <input type="submit" value="Buscar"/>
+    </form>
+    
+    <div class="divDatosUsuario" *ngIf="mostrarDatos">        
+        <div class="imagenUsuarioGit">
+            <img [src]="imagenUsuario"/>
+        </div>
+
+        <div class="nombreUsuarioGit">
+            <h3>{{nombreUsuario.toLocaleUpperCase()}}</h3>
+        </div>
+    </div>
+
+    <div *ngIf="mostrarDatos">
+        <div class="divBotones">
+            <input (click)="handleCLickAtras()" type='button' value="atras">
+            <input (click)="handleCLickSiguientes()" style="margin-left: 60%;" type='button' value="siguiente">
+        </div>
+        <div  class="divDatosGit"  *ngFor="let index of datosUsuarios" >
+            <p>{{index.name}}</p>
+            <a [routerLink]="['/issues',index.owner.login,index.name ]">Ver issues</a>
+            <a [href]="index.html_url">Ver repo en gitHub</a>
+        </div>
+
+    </div>
+    
+
+</section>
