@@ -85,6 +85,14 @@
     float: left;
 }
 
+.divIssues a{
+    text-decoration: none;
+}
+
+.aEnlace{
+    color: blue;
+}
+
 .demo{
     background: #85C3E5;
 }

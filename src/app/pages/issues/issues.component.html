@@ -11,12 +11,10 @@
     
     <div class="divContenedorIssues" *ngIf="aparecerContenedor">
         <div class="divIssues" *ngFor="let index of arrayIssues">
-            <a [href]="index.html_url">{{index.title}}</a>
+            <a [routerLink]="['/comentarios',usuarioGit,repoGit,index.number]">{{index.title}}</a>
             <label class="labelName" *ngFor="let indexDos of index.labels" [ngClass]="{'demo':indexDos.name=='demo', 'priorityHigh':indexDos.name=='Priority: High', 'enhancement':indexDos.name=='enhancement','priorityLow':indexDos.name=='Priority: Low' }">{{indexDos.name}}</label>
+            <a [href]="index.html_url" class="aEnlace">Ver en Github</a>
         </div>
     </div>
 
 </section>
-
-<!-- https://api.github.com/repos/microsoft/0xDeCA10B/issues/93 -->
-<!-- https://api.github.com/repos/microsoft/0xDeCA10B/issues/93/comments -->

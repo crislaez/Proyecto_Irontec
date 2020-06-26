@@ -11,6 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { IssuesComponent } from './pages/issues/issues.component';
+import { ComentariosComponent } from './pages/comentarios/comentarios.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { IssuesComponent } from './pages/issues/issues.component';
     HeaderComponent,
     FooterComponent,
     InicioComponent,
-    IssuesComponent
+    IssuesComponent,
+    ComentariosComponent,
   ],
   imports: [
     BrowserModule,
