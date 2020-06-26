@@ -15,7 +15,7 @@
     float: left;
 }
 
-.formBuscador input[type='text']{
+.campoTextoFormulario{
     width: 70%;
     height: 50px;
     border-radius: 5px;
@@ -23,7 +23,7 @@
     border: 1px solid gray;
 }
 
-.formBuscador input[type='submit']{
+.campoBotonFormulario{
     width: 25%;
     margin-left: 1%;
     height: 50px;
@@ -35,7 +35,7 @@
     cursor: pointer;
 }
 
-.formBuscador input[type='submit']:hover{
+.campoBotonFormulario:hover{
     background: #A3DAF1;
 }
 
@@ -44,8 +44,18 @@
     margin-left: 35%;
     margin-top: 20px;
     /* background: burlywood; */
-    height:370px;
+    height:420px;
     float: left;
+}
+
+.divDatosUsuario form{
+    width: 100%;
+    height: 50px;
+    float: left;
+}
+
+.divDatosUsuario form input[type='text']{
+
 }
 
 .imagenUsuarioGit{

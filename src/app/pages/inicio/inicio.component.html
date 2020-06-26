@@ -1,8 +1,8 @@
 <section class="sectionInicio">
 
     <form class="formBuscador" (submit)="handleSubmit()" action="" method="" enctype="">
-        <input [(ngModel)]="nombre" type="text" name="nombre" placeholder="Usuario github..."/>
-        <input type="submit" value="Buscar"/>
+        <input [(ngModel)]="nombre" class="campoTextoFormulario" type="text" name="nombre" placeholder="Usuario github..."/>
+        <input class="campoBotonFormulario" type="submit" value="Buscar"/>
     </form>
     
     <div class="divDatosUsuario" *ngIf="mostrarDatos">        
@@ -13,18 +13,36 @@
         <div class="nombreUsuarioGit">
             <h3>{{nombreUsuario.toLocaleUpperCase()}}</h3>
         </div>
+
+        <form (submit)="handleSubmitBuscarRepo()" accept="" method="" enctype="">
+            <input [(ngModel)]="nombreRepo" class="campoTextoFormulario"  type='text' name="repos" placeholder="o busca por el nombre de repo...">
+            <input class="campoBotonFormulario" type='Submit' value="Buscar">
+        </form>
     </div>
+   
 
     <div *ngIf="mostrarDatos">
         <div class="divBotones">
             <input (click)="handleCLickAtras()" type='button' value="atras">
             <input (click)="handleCLickSiguientes()" style="margin-left: 60%;" type='button' value="siguiente">
         </div>
-        <div  class="divDatosGit"  *ngFor="let index of datosUsuarios" >
-            <p>{{index.name}}</p>
-            <a [routerLink]="['/issues',index.owner.login,index.name ]">Ver issues</a>
-            <a [href]="index.html_url">Ver repo en gitHub</a>
+
+        <div *ngIf="mostrarTodosRepos">
+            <div  class="divDatosGit"  *ngFor="let index of datosUsuarios" >
+                <p>{{index.name}}</p>
+                <a [routerLink]="['/issues',index.owner.login,index.name ]">Ver issues</a>
+                <a [href]="index.html_url">Ver repo en gitHub</a>
+            </div>
         </div>
+
+        <div *ngIf="mostrarUnRepo">
+            <div  class="divDatosGit"  >
+                <p>{{datosUsuarios.name}}</p>
+                <a [routerLink]="['/issues',datosUsuarios.owner.login,datosUsuarios.name ]">Ver issues</a>
+                <a [href]="datosUsuarios.html_url">Ver repo en gitHub</a>
+            </div>
+        </div>
+        
 
     </div>
     
