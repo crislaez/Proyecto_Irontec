@@ -12,10 +12,9 @@
     <div class="divContenedorIssues" *ngIf="aparecerContenedor">
         <div class="divIssues" *ngFor="let index of arrayIssues">
             <a [href]="index.html_url">{{index.title}}</a>
-            <label class="labelName" *ngFor="let indexDos of index.labels">{{indexDos.name}}</label>
+            <label class="labelName" *ngFor="let indexDos of index.labels" [ngClass]="{'demo':indexDos.name=='demo', 'priorityHigh':indexDos.name=='Priority: High', 'enhancement':indexDos.name=='enhancement','priorityLow':indexDos.name=='Priority: Low' }">{{indexDos.name}}</label>
         </div>
     </div>
 
 </section>
 
-<!-- <label class="labelName" *ngIf="index.labels[0].name">{{index.labels[0].name}}</label> -->

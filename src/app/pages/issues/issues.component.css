@@ -59,11 +59,8 @@
     width: 80%;
     min-height: 50px;
     margin-left: 10%;
-    /* margin-top: 20px; */
     border: 1px solid gray; 
     background: #F7F7F7;
-    /* box-shadow: 0px 0px 10px black; */
-    /* border-radius: 5px; */
     float: left;
 }
 
@@ -78,8 +75,7 @@
 }
 
 .labelName{
-    /* width: 10%; */
-    background: #85C3E5;
+    background: #C3C3C3;
     font: 15px;
     border-radius: 10px;
     padding: 5px;
@@ -87,4 +83,24 @@
     color: white;
     margin-left: 1%;
     float: left;
+}
+
+.demo{
+    background: #85C3E5;
+}
+
+.priorityHigh{
+    background: #F94168;
+}
+
+.priorityLow{
+    background: #8CF177;
+}
+
+.enhancement{
+    background: #77EEF1;
+}
+
+.sinEstilo{
+    background: ;
 }
