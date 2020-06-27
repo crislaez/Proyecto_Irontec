@@ -80,9 +80,7 @@ export class InicioComponent implements OnInit,DoCheck {
           this.mostrarTodosRepos = false;
           //y el div que no tiene, se carge
           this.mostrarUnRepo = true;
-          this.datosUsuarios = response
-          console.log('aqui')
-          console.log(this.datosUsuarios.name)         
+          this.datosUsuarios = response  
         }else{
           alert('No existe ese repositorio')
         }        
