@@ -1,48 +1,83 @@
-<section class="sectionInicio">
+<section class="sectionInicio container">
 
-    <form class="formBuscador" (submit)="handleSubmit()" action="" method="" enctype="">
-        <input [(ngModel)]="nombre" class="campoTextoFormulario" type="text" name="nombre" placeholder="Usuario github..."/>
-        <input class="campoBotonFormulario" type="submit" value="Buscar"/>
-    </form>
-    
-    <div class="divDatosUsuario" *ngIf="mostrarDatos">        
-        <div class="imagenUsuarioGit">
-            <img [src]="imagenUsuario"/>
-        </div>
-
-        <div class="nombreUsuarioGit">
-            <h3>{{nombreUsuario.toLocaleUpperCase()}}</h3>
-        </div>
-
-        <form (submit)="handleSubmitBuscarRepo()" accept="" method="" enctype="">
-            <input [(ngModel)]="nombreRepo" class="campoTextoFormulario"  type='text' name="repos" placeholder="o busca por el nombre de repo...">
-            <input class="campoBotonFormulario" type='Submit' value="Buscar">
+    <div class="row justify-content-center">
+      <div class="col-4 py-2">
+        <form class="form-inline" (submit)="handleSubmit()" action="" method="" enctype="">
+          <input [(ngModel)]="nombre" class="form-control" type="text" name="nombre" placeholder="Usuario github..."/>
+          <input class="btn btn-primary ml-2" type="submit" value="Buscar"/>
         </form>
+      </div>
     </div>
-   
 
-    <div *ngIf="mostrarDatos">
-        <div class="divBotones">
-            <input (click)="handleCLickAtras()" type='button' value="atras">
-            <input (click)="handleCLickSiguientes()" style="margin-left: 60%;" type='button' value="siguiente">
+    <div class="row" *ngIf="mostrarDatos">
+        <div class="col-12">
+          <div class="row justify-content-center">
+            <div class="col-4">
+                <div class="imagenUsuarioGit">
+                  <img [src]="imagenUsuario"/>
+                </div>
+            </div>
+          </div>
         </div>
 
-        <div *ngIf="mostrarTodosRepos">
-            <div  class="divDatosGit"  *ngFor="let index of datosUsuarios" >
-                <p>{{index.name}}</p>
-                <a [routerLink]="['/issues',index.owner.login,index.name ]">Ver issues</a>
-                <a [href]="index.html_url">Ver repo en gitHub</a>
+        <div class="col-12 py-2">
+          <div class="row justify-content-center">
+            <div class="col-4">
+              <div class="nombreUsuarioGit">
+                <h3 class="text-center">{{nombreUsuario.toLocaleUpperCase()}}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="row justify-content-center">
+            <div class="col-4 py-2">
+              <form class="form-inline" (submit)="handleSubmitBuscarRepo()" accept="" method="" enctype="">
+                <input [(ngModel)]="nombreRepo" class="form-control"  type='text' name="repos" placeholder="busca por repo...">
+                <input class="btn btn-primary ml-2" type='Submit' value="Buscar">
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="mostrarDatos">
+        <div class="col-12">
+          <div class="row justify-content-center py-1">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6">
+                  <input class="btn btn-primary" (click)="handleCLickAtras()" type='button' value="atras">
+                </div>
+                <div class="col-6">
+                  <input class="btn btn-primary" (click)="handleCLickSiguientes()" style="margin-left: 70%" type='button' value="siguiente">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12" *ngIf="mostrarTodosRepos">
+            <div class="row justify-content-center">
+              <div  class="col-3 m-2 p-2 alto"  *ngFor="let index of datosUsuarios" >
+                <p class="text-center h5 mt-2">{{index.name}}</p>
+                <a class="d-block text-center mt-4" [routerLink]="['/issues',index.owner.login,index.name ]">Ver issues</a>
+                <a class="d-block text-center mt-2" [href]="index.html_url">Ver repo en gitHub</a>
+              </div>
             </div>
         </div>
 
-        <div *ngIf="mostrarUnRepo">
-            <div  class="divDatosGit"  >
-                <p>{{datosUsuarios.name}}</p>
-                <a [routerLink]="['/issues',datosUsuarios.owner.login,datosUsuarios.name ]">Ver issues</a>
-                <a [href]="datosUsuarios.html_url">Ver repo en gitHub</a>
+        <div class="col-12" *ngIf="mostrarUnRepo">
+          <div class="row justify-content-center">
+            <div class="col-3 m-2 p-2 alto"  >
+                <p class="text-center h5 mt-2">{{datosUsuarios.name}}</p>
+                <a class="d-block text-center mt-4" [routerLink]="['/issues',datosUsuarios.owner.login,datosUsuarios.name ]">Ver issues</a>
+                <a class="d-block text-center mt-2" [href]="datosUsuarios.html_url">Ver repo en gitHub</a>
             </div>
+          </div>
         </div>
-    </div>
-    
+  </div>
+
 
 </section>

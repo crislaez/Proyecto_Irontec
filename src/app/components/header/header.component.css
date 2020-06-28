@@ -3,13 +3,9 @@ header{
     height: 500px;
     background-image: url('../../../assets/logo.jpg');
     background-size: 100%, 500px;
-    float: left;
 }
 
-header h1{
-    text-align: center;
-    color: white;
-    margin-top: 200px;
-    font-size: 70px;
-    text-shadow: 3px 3px 3px gray;
+.tituloheader{
+  margin-top: 250px;
+  text-shadow: 3px 3px 3px gray;
 }

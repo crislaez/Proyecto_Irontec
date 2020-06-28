@@ -1,20 +1,29 @@
-<section class="sectionIssues">   
-    
-    <div class="tituloIssues">
-        <h2>Issues</h2>
-        <input [routerLink]="['/']" type='button' value="ir a inicio">
+<section class="sectionIssues container">
+
+  <div class="row">
+    <div class="col-12 tituloIssues">
+      <div class="row justify-content-center">
+        <div class="col-4 alto">
+          <h2 class="d-inline ml-5 mt-2">Issues</h2>
+          <input class="btn btn-warning ml-5 d-inline text-white" [routerLink]="['/']" type='button' value="ir a inicio">
+        </div>
+      </div>
     </div>
 
-    <div class="divNombeRepositorio">
-        <h3>ISSUES DEL PROJECTO {{repoGit}}</h3>
+    <div class="col-12 py-4">
+      <h3 class="text-center">ISSUES DEL PROJECTO {{repoGit}}</h3>
     </div>
-    
-    <div class="divContenedorIssues" *ngIf="aparecerContenedor">
-        <div class="divIssues" *ngFor="let index of arrayIssues">
-            <a [routerLink]="['/comentarios',usuarioGit,repoGit,index.number]">{{index.title}}</a>
-            <label class="labelName" *ngFor="let indexDos of index.labels" [ngClass]="{'demo':indexDos.name=='demo', 'priorityHigh':indexDos.name=='Priority: High', 'enhancement':indexDos.name=='enhancement','priorityLow':indexDos.name=='Priority: Low' }">{{indexDos.name}}</label>
-            <a [href]="index.html_url" class="aEnlace">Ver en Github</a>
+
+    <div class="col-12" *ngIf="aparecerContenedor">
+      <div class="row justify-content-center">
+        <div class="col-10 divIssues" *ngFor="let index of arrayIssues">
+          <a class="text-dark" [routerLink]="['/comentarios',usuarioGit,repoGit,index.number]">{{index.title}}</a>
+          <label class="labelName b-inline" *ngFor="let indexDos of index.labels" [ngClass]="{'demo':indexDos.name=='demo', 'priorityHigh':indexDos.name=='Priority: High', 'enhancement':indexDos.name=='enhancement','priorityLow':indexDos.name=='Priority: Low' }">{{indexDos.name}}</label>
+          <a [href]="index.html_url" class="aEnlace">Ver en Github</a>
         </div>
+      </div>
     </div>
+
+  </div>
 
 </section>

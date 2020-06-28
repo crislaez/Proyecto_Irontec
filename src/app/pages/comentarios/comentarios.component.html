@@ -1,35 +1,58 @@
-<section class="sectionComentarios">
-    <div class="tituloComentarios">
-        <h2>Comentarios</h2>
-        <input [routerLink]="['/']" type='button' value="ir a inicio">
+<section class="sectionComentarios container">
+
+  <div class="row">
+    <div class="col-12 tituloComentarios">
+     <div class="row justify-content-center">
+       <div class="col-sm-12 col-md-8 col-lg-5 mt-2">
+        <h2 class="d-inline ml-5 mt-2">Comentarios</h2>
+        <input class="btn btn-warning d-inlinec ml-4 text-white" [routerLink]="['/']" type='button' value="ir a inicio">
+       </div>
+     </div>
     </div>
 
-    <div *ngIf="cargado">
-        <div class="divComentario">
-            <div class="nombreComentario">
-                <div class="imagenUsuario">
-                    <a [href]="datosUsuarioIssue.user.html_url"><img [src]="datosUsuarioIssue.user.avatar_url" /></a>
+    <div class="col-12">
+      <div class="row justify-content-center">
+        <div class="col-10 "  *ngIf="cargado">
+          <div class="row justify-content-center">
+
+            <div class="col-12 mt-5 divComentario">
+              <div class="row">
+                <div class="col-12 nombreComentario">
+                  <div class="imagenUsuario">
+                      <a [href]="datosUsuarioIssue.user.html_url"><img [src]="datosUsuarioIssue.user.avatar_url" /></a>
+                  </div>
+                  <h3>{{datosUsuarioIssue.user.login}}</h3>
                 </div>
-                <h3>{{datosUsuarioIssue.user.login}}</h3>
+
+                <div class="col-12 contenidoComentario">
+                  <p class="p-3">{{datosUsuarioIssue.body}}</p>
+                </div>
+              </div>
             </div>
 
-            <div class="contenidoComentario">
-                <p>{{datosUsuarioIssue.body}}</p>
-            </div>            
-        </div>
-
-        <div class="divComentario" *ngFor="let index of datosComentarios">
-            <div class="nombreComentario">
-                <div class="imagenUsuario">
-                    <a [href]="index.user.html_url"><img [src]="index.user.avatar_url" /></a>
+            <div class="col-12 mt-5 divComentario" *ngFor="let index of datosComentarios">
+              <div class="row">
+                <div class="col-12 nombreComentario">
+                    <div class="imagenUsuario">
+                        <a [href]="index.user.html_url"><img [src]="index.user.avatar_url" /></a>
+                    </div>
+                    <h3>{{index.user.login}}</h3>
                 </div>
-                <h3>{{index.user.login}}</h3>
+
+                <div class="col-12 contenidoComentario">
+                  <p class="p-3">{{index.body}}</p>
+                </div>
+              </div>
             </div>
 
-            <div class="contenidoComentario">
-                <p>{{index.body}}</p>
-            </div>            
+          </div>
         </div>
-
+      </div>
     </div>
+
+  </div>
+
+
+
 </section>
+
