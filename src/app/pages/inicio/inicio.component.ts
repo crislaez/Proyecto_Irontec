@@ -1,15 +1,23 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 //importamos el archivo services
-import {getGitData} from '../../Services/Services';
+import { getGitData } from '../../Services/Services';
 //importamos las variables de entorno
-import {enviroment} from '../../../../enviroment.prod'
+import { enviroment } from '../../../../enviroment.prod';
+//importamos el Store
+import { Store, select} from '@ngrx/store';
+//importamos el obserbable
+import { Observable } from 'rxjs';
+import * as action from '../../contador.action';
+
 
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css']
 })
-export class InicioComponent implements OnInit,DoCheck {
+export class InicioComponent implements OnInit {
+
+  contador$: Observable<number>;
 
   public nombre:String; //variable para buscar todos los repositorios por usuario
   public mostrarDatos:Boolean; //variable para mostra los divs escondidos
@@ -21,29 +29,28 @@ export class InicioComponent implements OnInit,DoCheck {
   public nombreUsuario:String //nombre del usuario git
   public contadorPagina:number; //para el paginado
   public ruta:String; //ruta para el paginado
+  public mostrarBotonesAtras:boolean;//para mostrar los botones del paginado
 
-  constructor() { 
+  constructor(private store: Store<{contador:number}>) {
 
   }
 
   ngOnInit(): void {
     this.mostrarDatos = false;
+    this.mostrarBotonesAtras = false;
     this.mostrarUnRepo = false;
-    this.contadorPagina = 1;
+    this.contador$ = this.store.pipe(select('contador'));
+    this.store.subscribe(s =>  this.contadorPagina = s.contador);
   };
 
-  ngDoCheck():void{
-
-  };
-  
   //buscar repositorios por usuarios
   handleSubmit(){
-    event.preventDefault();    
+    event.preventDefault();
     //si la variable esta vacia, retorna
     if(!this.nombre){
       alert('Rellene el campo de texto');
       return false
-    };   
+    };
 
     //llamamos a la funcion que esta en services que hace la peticion a git
     getGitData(enviroment.ruta+this.nombre)
@@ -51,13 +58,14 @@ export class InicioComponent implements OnInit,DoCheck {
       if(response.message){
         alert('No se ha encontraod usuario');
       }else{
-        this.mostrarDatos = true; 
+        this.mostrarDatos = true;
+        this.mostrarBotonesAtras = true;
         this.imagenUsuario = response.avatar_url
         this.nombreUsuario = response.login
         this.ruta = response.repos_url;
         //llamamos ma la funcion qwue esta abajo
         this.funcionFetch(this.contadorPagina)
-      }      
+      }
     })
     .catch(err => console.log(err));
 
@@ -67,7 +75,7 @@ export class InicioComponent implements OnInit,DoCheck {
 
   //buscar por repositorio
   handleSubmitBuscarRepo(){
-    event.preventDefault();  
+    event.preventDefault();
     if(!this.nombreRepo){
       alert('Rellene el nombre del repo')
     }else{
@@ -78,12 +86,14 @@ export class InicioComponent implements OnInit,DoCheck {
         if(!response.message){
           //hacemos que el div que tiene el ngFor sea false para que no se cargue
           this.mostrarTodosRepos = false;
+          //para no mostrar los botones del paginado
+          this.mostrarBotonesAtras = false;
           //y el div que no tiene, se carge
           this.mostrarUnRepo = true;
-          this.datosUsuarios = response  
+          this.datosUsuarios = response
         }else{
           alert('No existe ese repositorio')
-        }        
+        }
       })
       .catch(err => console.log(err))
     }
@@ -93,33 +103,31 @@ export class InicioComponent implements OnInit,DoCheck {
 
   //funcion para el boton atras
   handleCLickAtras(){
-    this.contadorPagina--;
-
-    if(this.contadorPagina < 1){           
+    if(this.contadorPagina == 1){
       alert('No puyedes ir mas atras');
-      this.contadorPagina = 1 
-    }else{      
-      console.log(this.contadorPagina)
+      // this.contadorPagina = 1
+    }else{
+      this.store.dispatch(action.dec());
+      this.store.subscribe(s =>  this.contadorPagina = s.contador);
       this.funcionFetch(this.contadorPagina)
-    }    
+    }
   };
 
   //funcion para el boton siguiente
   handleCLickSiguientes(){
-    //si la longitud del array es mebnos de 30 significa que no hay mas proeyctos, por lo tanto no podra dar siguiente    
+    //si la longitud del array es mebnos de 30 significa que no hay mas proeyctos, por lo tanto no podra dar siguiente
     if(this.datosUsuarios.length < 30){
       alert('No hay mas repositorios')
     }else{
-      this.contadorPagina++;
-      console.log(this.contadorPagina);
+      this.store.dispatch(action.inc());
+      this.store.subscribe(s =>  this.contadorPagina = s.contador);
       this.funcionFetch(this.contadorPagina);
-    }    
-
+    }
   };
 
   //funcion fetch
   funcionFetch(pagina){
-    getGitData(this.ruta +`?page=${this.contadorPagina}&per_page=30`)
+    getGitData(this.ruta +`?page=${pagina}&per_page=30`)
     .then((response:any) => {
       //hacemos que el div que tiene el ngFor sea false para que se cargue
        this.mostrarTodosRepos = true;

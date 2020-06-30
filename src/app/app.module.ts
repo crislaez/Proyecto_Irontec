@@ -12,6 +12,10 @@ import { FooterComponent } from './components/footer/footer.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { IssuesComponent } from './pages/issues/issues.component';
 import { ComentariosComponent } from './pages/comentarios/comentarios.component';
+//importamos el store
+import { StoreModule } from '@ngrx/store';
+//importamos el reducer
+import { counterReducer } from './contador.reducer';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,8 @@ import { ComentariosComponent } from './pages/comentarios/comentarios.component'
     BrowserModule,
     AppRoutingModule,
     routing,  //ruta-------------------------
-    FormsModule //formularios-----
+    FormsModule,
+    StoreModule.forRoot({contador: counterReducer}) //formularios-----
   ],
   providers: [
     appRoutingProviders //ruta-----------------
