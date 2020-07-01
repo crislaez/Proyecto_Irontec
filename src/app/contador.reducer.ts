@@ -8,6 +8,7 @@ const _counterReducer = createReducer(
   initial,
   on(states.inc, state => state + 1),
   on(states.dec, state => state - 1),
+  on(states.ig, state => state = 1),
 );
 
 export function counterReducer(state, action){

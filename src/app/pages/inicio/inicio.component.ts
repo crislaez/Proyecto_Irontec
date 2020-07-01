@@ -57,7 +57,8 @@ export class InicioComponent implements OnInit {
     .then((response:any) => {
       if(response.message){
         alert('No se ha encontraod usuario');
-      }else{
+      }
+      else{
         this.mostrarDatos = true;
         this.mostrarBotonesAtras = true;
         this.imagenUsuario = response.avatar_url
@@ -76,9 +77,11 @@ export class InicioComponent implements OnInit {
   //buscar por repositorio
   handleSubmitBuscarRepo(){
     event.preventDefault();
+
     if(!this.nombreRepo){
       alert('Rellene el nombre del repo')
-    }else{
+    }
+    else{
       // enviroment.rutarepos+this.usuarioGit+'/'+this.repoGit
       getGitData(enviroment.rutarepos+this.nombreUsuario+'/'+this.nombreRepo)
       .then((response:any) => {
@@ -105,11 +108,11 @@ export class InicioComponent implements OnInit {
   handleCLickAtras(){
     if(this.contadorPagina == 1){
       alert('No puyedes ir mas atras');
-      // this.contadorPagina = 1
-    }else{
+    }
+    else{
       this.store.dispatch(action.dec());
       this.store.subscribe(s =>  this.contadorPagina = s.contador);
-      this.funcionFetch(this.contadorPagina)
+      this.funcionFetch(this.contadorPagina);
     }
   };
 
@@ -118,7 +121,8 @@ export class InicioComponent implements OnInit {
     //si la longitud del array es mebnos de 30 significa que no hay mas proeyctos, por lo tanto no podra dar siguiente
     if(this.datosUsuarios.length < 30){
       alert('No hay mas repositorios')
-    }else{
+    }
+    else{
       this.store.dispatch(action.inc());
       this.store.subscribe(s =>  this.contadorPagina = s.contador);
       this.funcionFetch(this.contadorPagina);

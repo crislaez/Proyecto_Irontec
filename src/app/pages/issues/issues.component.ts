@@ -19,21 +19,19 @@ export class IssuesComponent implements OnInit {
   contador$: Observable<number>;
 
   public arrayIssues:any[];
-  public aparecerContenedor:Boolean;
-  public usuarioGit:String; //variable donde guardaremos el nombre del usuario del git
-  public repoGit:String; //variable donde guardaremos el nombre del projecto qeu hemos escogido para ver las issues
+  public aparecerContenedor:boolean;
+  public usuarioGit:string; //variable donde guardaremos el nombre del usuario del git
+  public repoGit:string; //variable donde guardaremos el nombre del projecto qeu hemos escogido para ver las issues
   public pagina:number;
 
   constructor(private store: Store<{contador:number}>) { }
 
   ngOnInit(): void {
-    // this.pagina = 1;
     this.aparecerContenedor = false
     //dividimos la url para coger los aprametros del nombre del usuario y del nombre del repo para buscar las issues
     this.usuarioGit = window.location.href.split('/')[4];
-    this.repoGit = window.location.href.split('/')[5]
-    // console.log(this.usuarioGit);
-    // console.log(this.repoGit);
+    this.repoGit = window.location.href.split('/')[5];
+    this.store.dispatch(action.ig());
     this.store.subscribe(s =>  this.pagina = s.contador);
     this.funcionFetch(this.pagina);
 
@@ -43,38 +41,42 @@ export class IssuesComponent implements OnInit {
   funcionFetch(pagina){
     getGitData(enviroment.rutarepos+this.usuarioGit+'/'+this.repoGit+`/issues?page=${pagina}&per_page=30`)
     .then((response:any) => {
-      console.log(response)
 
       if(response.toString()){
         this.aparecerContenedor = true;
         this.arrayIssues = response
-      }else{
+      }
+      else{
         alert('No hay issues')
         window.location.href = '/';
       }
     })
     .catch(err => console.log(err))
-  }
+  };
 
 
   clickAtras(){
     if(this.pagina == 1){
       alert('No puedes hechar mas atras');
-    }else{
+    }
+    else{
       this.store.dispatch(action.dec());
       this.store.subscribe(s =>  this.pagina = s.contador);
       this.funcionFetch(this.pagina);
     }
   };
 
+
   clickSiguiente(){
     if(this.arrayIssues.length < 30){
       alert('No hay mas paginas')
-    }else{
+    }
+    else{
       this.store.dispatch(action.inc());
       this.store.subscribe(s =>  this.pagina = s.contador);
       this.funcionFetch(this.pagina);
     }
   };
+
 
 }
